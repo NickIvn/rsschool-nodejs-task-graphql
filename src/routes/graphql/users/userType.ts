@@ -28,13 +28,13 @@ export const UserType = new GraphQLObjectType({
     userSubscribedTo: {
       type: new GraphQLList(UserType),
       resolve: async ({ id }: User, __: unknown, { loaders }: Context) => 
-        await loaders.postDataLoader.load(id),
+        await loaders.userSubDataLoader.load(id),
     },
 
     subscribedToUser: {
       type: new GraphQLList(UserType),
       resolve: async ({ id }: User, __: unknown, { loaders }: Context) => 
-        await loaders.postDataLoader.load(id),
+        await loaders.subUserDataLoader.load(id),
     },
   }),
 });
