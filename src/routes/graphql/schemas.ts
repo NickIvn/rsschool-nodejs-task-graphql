@@ -7,6 +7,7 @@ import { getProfileQuery } from './profile/profileQuery.js';
 //import { UserMutation } from './users/userMutation.js';
 import { PostMutation } from './post/postMutation.js';
 import { UserMutation } from './users/userMutation.js';
+import { ProfileMutation } from './profile/profileMutation.js';
 
 export const gqlResponseSchema = Type.Partial(
   Type.Object({
@@ -41,8 +42,8 @@ const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
     ...PostMutation,
-    ...UserMutation
-    // Добавьте другие мутации здесь, если они есть
+    ...UserMutation,
+    ...ProfileMutation,
   }),
 });
 
