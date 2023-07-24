@@ -27,7 +27,6 @@ export const createGqlResponseSchema = {
     },
   ),
 };
-
 const query = new GraphQLObjectType({
   name: 'Query',
   fields: {
@@ -40,11 +39,11 @@ const query = new GraphQLObjectType({
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
-  fields: () => ({
-    ...PostMutation,
+  fields: {
     ...UserMutation,
+    ...PostMutation,
     ...ProfileMutation,
-  }),
+  },
 });
 
 
