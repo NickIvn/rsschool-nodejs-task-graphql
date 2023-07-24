@@ -15,44 +15,26 @@ export const UserType = new GraphQLObjectType({
     balance: { type: GraphQLFloat },
     profile: {
       type: ProfileType as GraphQLObjectType,
-      resolve: async ({ id }: User, __: unknown, { loaders }: Context) => {
-        const profile = await loaders.profileDataLoader.load(id)
-        return profile;
-      }
-
+      resolve: async ({ id }: User, __: unknown, { loaders }: Context) =>
+      await loaders.profileDataLoader.load(id)
     },
 
     posts: {
       type: new GraphQLList(PostType),
-      resolve: async ({ id }: User, __: unknown, { prisma }: Context) => 
-        await prisma.post.findMany({ where: { authorId: id } }),
+      resolve: async ({ id }: User, __: unknown, { loaders }: Context) => 
+        await loaders.postDataLoader.load(id),
     },
 
     userSubscribedTo: {
       type: new GraphQLList(UserType),
-      resolve: async ({ id }: User, __: unknown, { prisma }: Context) =>
-        await prisma.user.findMany({
-          where: {
-            subscribedToUser: {
-              some: {
-                subscriberId: id,
-              },
-            },
-          },
-        }),
+      resolve: async ({ id }: User, __: unknown, { loaders }: Context) => 
+        await loaders.postDataLoader.load(id),
     },
+
     subscribedToUser: {
       type: new GraphQLList(UserType),
-      resolve: async ({ id }: User, __: unknown, { prisma }: Context) =>
-        await prisma.user.findMany({
-          where: {
-            userSubscribedTo: {
-              some: {
-                authorId: id,
-              },
-            },
-          },
-        }),
+      resolve: async ({ id }: User, __: unknown, { loaders }: Context) => 
+        await loaders.postDataLoader.load(id),
     },
   }),
 });
