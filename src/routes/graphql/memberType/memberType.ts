@@ -7,7 +7,7 @@ import {
   } from 'graphql';
   import { MemberType as PrismaMemberType } from '@prisma/client';
   import { Context } from '../types/context.js';
-  import { ProfileType } from '../profile/typeProfile.js';
+  import { ProfileType } from '../profile/profileType.js';
 
   import { MemberTypeId } from '../../member-types/schemas.js';
 

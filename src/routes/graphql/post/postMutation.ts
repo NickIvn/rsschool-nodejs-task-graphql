@@ -1,6 +1,6 @@
 import { Post } from '@prisma/client';
-import { PostType } from "./typePost.js";
-import { ChangePostInput, CreatePostInput } from "./InputPost.js";
+import { PostType } from "./postType.js";
+import { ChangePostInput, CreatePostInput } from "./postInput.js";
 import { Context } from "../types/context.js";
 import { UUIDType } from "../types/uuid.js";
 
